@@ -1,0 +1,24 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: argocd-ingress
+  namespace: argocd
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`argocd.immoon.me`)
+      priority: 10
+      services:
+        - name: ian-argocd
+          port: 8080
+    - kind: Rule
+      match: Host(`argocd.immoon.me`) && Headers(`Content-Type`, `application/grpc`)
+      priority: 11
+      services:
+        - name: ian-argocd
+          port: 8080
+          scheme: h2c
+  tls:
+    certResolver: le

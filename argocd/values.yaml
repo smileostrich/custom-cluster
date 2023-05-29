@@ -1,0 +1,14 @@
+configs:
+  params:
+    server.insecure: true
+  cm:
+    dex.config: |
+      connectors:
+        - type: github
+          id: github
+          name: github
+          config:
+            clientID: {{ .Values.teller.clientid }}
+            clientSecret: {{ .Values.teller.clientsecret }}
+            orgs:
+            - name: ian-ilminmoon

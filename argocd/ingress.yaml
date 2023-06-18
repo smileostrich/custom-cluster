@@ -11,14 +11,14 @@ spec:
       match: Host(`argocd.immoon.me`)
       priority: 10
       services:
-        - name: ian-argocd
-          port: 8080
+        - name: ian-argo-argocd-server
+          port: 80
     - kind: Rule
       match: Host(`argocd.immoon.me`) && Headers(`Content-Type`, `application/grpc`)
       priority: 11
       services:
-        - name: ian-argocd
-          port: 8080
+        - name: ian-argo-argocd-server
+          port: 80
           scheme: h2c
   tls:
     certResolver: le
